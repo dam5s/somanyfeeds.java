@@ -1,4 +1,4 @@
-package com.somanyfeeds;
+package com.somanyfeeds.articles;
 
 import java.util.Date;
 
