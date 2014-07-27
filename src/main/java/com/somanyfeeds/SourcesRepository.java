@@ -16,15 +16,14 @@ public class SourcesRepository {
         allSources.put("pivotal", new SourceEntity("Pivotal Blog", "pivotal"));
     }
 
-
-    public List<SourceEntity> findAllSources() {
+    public List<SourceEntity> findAll() {
         return allSources
                 .values()
                 .stream()
                 .collect(Collectors.toList());
     }
 
-    public List<SourceEntity> findAllSourcesBySlug(List<String> sourceSlugs) {
+    public List<SourceEntity> findAllBySlug(List<String> sourceSlugs) {
         List<SourceEntity> sources = sourceSlugs.stream()
                 .map(allSources::get)
                 .collect(Collectors.toList());

@@ -15,6 +15,10 @@ public class ArticleEntity {
         this.date = date;
     }
 
+    public static Builder articleEntityBuilder() {
+        return new Builder();
+    }
+
     public String getTitle() {
         return title;
     }
@@ -31,8 +35,28 @@ public class ArticleEntity {
         return date;
     }
 
-    public static Builder articleEntityBuilder() {
-        return new Builder();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArticleEntity that = (ArticleEntity) o;
+
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (link != null ? !link.equals(that.link) : that.link != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (link != null ? link.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
 
     public static class Builder {
@@ -68,22 +92,5 @@ public class ArticleEntity {
         public ArticleEntity build() {
             return new ArticleEntity(title, link, content, date);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ArticleEntity that = (ArticleEntity) o;
-
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return date != null ? date.hashCode() : 0;
     }
 }

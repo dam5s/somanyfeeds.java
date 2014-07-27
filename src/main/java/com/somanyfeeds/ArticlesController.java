@@ -21,14 +21,14 @@ public class ArticlesController {
 
     @RequestMapping("/")
     public String listAllArticles(Model model) {
-        List<SourceEntity> sources = sourcesRepository.findAllSources();
+        List<SourceEntity> sources = sourcesRepository.findAll();
 
         return listArticlesForSources(model, sources);
     }
 
-    @RequestMapping("/:sources")
+    @RequestMapping("/{sourceSlugs}")
     public String listArticles(@PathVariable List<String> sourceSlugs, Model model) {
-        List<SourceEntity> sources = sourcesRepository.findAllSourcesBySlug(sourceSlugs);
+        List<SourceEntity> sources = sourcesRepository.findAllBySlug(sourceSlugs);
 
         return listArticlesForSources(model, sources);
     }
