@@ -1,14 +1,15 @@
 package com.somanyfeeds.articles;
 
-import java.util.Date;
+
+import java.time.ZonedDateTime;
 
 public class ArticleEntity {
     private final String title;
     private final String link;
     private final String content;
-    private final Date date;
+    private final ZonedDateTime date;
 
-    public ArticleEntity(String title, String link, String content, Date date) {
+    public ArticleEntity(String title, String link, String content, ZonedDateTime date) {
         this.title = title;
         this.link = link;
         this.content = content;
@@ -31,7 +32,7 @@ public class ArticleEntity {
         return content;
     }
 
-    public Date getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
@@ -63,10 +64,10 @@ public class ArticleEntity {
         private String title;
         private String link;
         private String content;
-        private Date date;
+        private ZonedDateTime date;
 
         private Builder() {
-            date = new Date();
+            date = ZonedDateTime.now();
         }
 
         public Builder title(String title) {
@@ -84,7 +85,7 @@ public class ArticleEntity {
             return this;
         }
 
-        public Builder date(Date date) {
+        public Builder date(ZonedDateTime date) {
             this.date = date;
             return this;
         }

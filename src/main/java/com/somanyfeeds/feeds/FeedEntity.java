@@ -1,7 +1,7 @@
 package com.somanyfeeds.feeds;
 
-import com.somanyfeeds.feeds.atom.AtomFeed;
-import com.somanyfeeds.feeds.rss.RssFeed;
+import com.somanyfeeds.feeds.atom.AtomFeedEntity;
+import com.somanyfeeds.feeds.rss.RssFeedEntity;
 
 public abstract class FeedEntity {
     private final String url;
@@ -24,8 +24,6 @@ public abstract class FeedEntity {
         return type;
     }
 
-    ;
-
     public static enum Type {RSS, ATOM}
 
     public static class Builder {
@@ -45,9 +43,9 @@ public abstract class FeedEntity {
         public FeedEntity build() {
             switch (type) {
                 case RSS:
-                    return new RssFeed(url);
+                    return new RssFeedEntity(url);
                 case ATOM:
-                    return new AtomFeed(url);
+                    return new AtomFeedEntity(url);
             }
             throw new UnknownFeedTypeException(type);
         }

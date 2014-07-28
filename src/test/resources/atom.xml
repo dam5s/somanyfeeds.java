@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
+    <id>tag:github.com,2008:/dam5s</id>
+    <link type="text/html" rel="alternate" href="https://github.com/dam5s"/>
+    <link type="application/atom+xml" rel="self" href="https://github.com/dam5s.atom"/>
+    <title>dam5s&#39;s Activity</title>
+    <updated>2014-07-27T15:57:56Z</updated>
+    <entry>
+        <title type="html">dam5s created branch master at dam5s/somayfeeds.java</title>
+    </entry>
+    <entry>
+        <title>dam5s created repository dam5s/somayfeeds.java</title>
+    </entry>
+    <entry>
+        <title>dam5s pushed to master at dam5s/la_table_francophone</title>
+    </entry>
+    <entry>
+        <title>dam5s pushed to master at dam5s/la_table_francophone</title>
+    </entry>
+    <entry>
+        <title>dam5s commented on commit clubdesign/floatlabels.js@9dec978136</title>
+    </entry>
+    <entry>
+        <title>dam5s commented on commit clubdesign/floatlabels.js@9dec978136</title>
+    </entry>
+    <entry>
+        <title>dam5s opened issue spring-projects/spring-boot#1215</title>
+    </entry>
+    <entry>
+        <title>dam5s pushed to master at dam5s/webrouter</title>
+    </entry>
+    <entry>
+        <title>dam5s created branch master at dam5s/webrouter</title>
+    </entry>
+    <entry>
+        <title>dam5s created repository dam5s/webrouter</title>
+    </entry>
+    <entry>
+        <title>dam5s pushed to develop at cloudfoundry/bosh</title>
+    </entry>
+    <entry>
+        <title>dam5s pushed to develop at cloudfoundry/bosh</title>
+    </entry>
+    <entry>
+        <title>dam5s created branch gh-pages at dam5s/android-starter</title>
+    </entry>
+</feed>

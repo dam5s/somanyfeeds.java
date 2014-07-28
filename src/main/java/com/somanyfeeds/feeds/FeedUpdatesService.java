@@ -1,9 +1,7 @@
 package com.somanyfeeds.feeds;
 
-import com.somanyfeeds.articles.ArticleEntity;
-import com.somanyfeeds.articles.ArticlesRepository;
-import com.somanyfeeds.sources.SourceEntity;
-import com.somanyfeeds.sources.SourcesRepository;
+import com.somanyfeeds.articles.*;
+import com.somanyfeeds.sources.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +11,19 @@ import java.util.List;
 public class FeedUpdatesService {
     private final SourcesRepository sourcesRepository;
     private final ArticlesRepository articlesRepository;
-    private final FeedProcessorProvider feedProcessorProvider;
+    private final DispatchingFeedProcessor feedProcessor;
 
     @Autowired
-    public FeedUpdatesService(SourcesRepository sourcesRepository, ArticlesRepository articlesRepository, FeedProcessorProvider feedProcessorProvider) {
+    public FeedUpdatesService(SourcesRepository sourcesRepository, ArticlesRepository articlesRepository, DispatchingFeedProcessor feedProcessor) {
         this.sourcesRepository = sourcesRepository;
         this.articlesRepository = articlesRepository;
-        this.feedProcessorProvider = feedProcessorProvider;
+        this.feedProcessor = feedProcessor;
     }
 
     public void updateAll() {
         for (SourceEntity source : sourcesRepository.findAll()) {
-            FeedProcessor feedProcessor = feedProcessorProvider.get(source.getFeed());
-            List<ArticleEntity> articles = feedProcessor.process(source.getFeed());
+            FeedEntity feed = source.getFeed();
+            List<ArticleEntity> articles = feedProcessor.process(feed);
             articlesRepository.updateArticlesForSource(source, articles);
         }
     }

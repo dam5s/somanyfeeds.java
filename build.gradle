@@ -37,10 +37,21 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+
+    // Groovy Templates
     compile "org.codehaus.groovy:groovy:$groovyVersion"
     compile "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
+    // HTTP
+    compile "com.google.http-client:google-http-client:1.18.0-rc"
+
+    // XML Parsing
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.0"
+    compile "org.codehaus.woodstox:woodstox-core-asl:4.1.4"
+
+    // Testing
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
     testCompile "junit:junit:4.11"
     testCompile "org.mockito:mockito-core:1.9.5"

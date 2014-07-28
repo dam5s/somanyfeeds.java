@@ -1,10 +1,8 @@
-package articles;
+package somanyfeeds.articles;
 
 import com.somanyfeeds.articles.*;
-import com.somanyfeeds.sources.SourceEntity;
-import com.somanyfeeds.sources.SourcesRepository;
-import org.junit.Before;
-import org.junit.Test;
+import com.somanyfeeds.sources.*;
+import org.junit.*;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -51,7 +49,7 @@ public class ArticlesControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
                 .andExpect(model().attribute("sources", allSources))
-                .andExpect(model().attribute("articles", articlesForAllSources));
+                .andExpect(model().attribute("somanyfeeds/articles", articlesForAllSources));
     }
 
     @Test
@@ -73,6 +71,6 @@ public class ArticlesControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
                 .andExpect(model().attribute("sources", someSources))
-                .andExpect(model().attribute("articles", articlesForSomeSources));
+                .andExpect(model().attribute("somanyfeeds/articles", articlesForSomeSources));
     }
 }
