@@ -13,7 +13,11 @@ public class ArticlesRepository {
         List<ArticleEntity> articles = new ArrayList<>();
 
         for (SourceEntity source : sources) {
-            articles.addAll(articlesBySource.get(source));
+            List<ArticleEntity> sourcesArticles = articlesBySource.get(source);
+
+            if (sourcesArticles != null) {
+                articles.addAll(sourcesArticles);
+            }
         }
 
         articles.sort((a1, a2) -> a1.getDate().compareTo(a2.getDate()));

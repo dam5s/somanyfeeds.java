@@ -7,7 +7,7 @@ html(lang: "en") {
     }
     body {
         div(id: "articles") {
-            somanyfeeds.articles.each { a ->
+            articles.each { a ->
                 article {
                     header {
                         h1(a.title)
