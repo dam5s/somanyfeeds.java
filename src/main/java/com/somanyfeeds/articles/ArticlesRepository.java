@@ -20,7 +20,7 @@ public class ArticlesRepository {
             }
         }
 
-        articles.sort((a1, a2) -> a1.getDate().compareTo(a2.getDate()));
+        articles.sort((a1, a2) -> a2.getDate().compareTo(a1.getDate()));
         return articles;
     }
 
