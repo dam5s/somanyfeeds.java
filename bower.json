@@ -1,0 +1,20 @@
+{
+  "name": "somanyfeeds.java",
+  "version": "0.1.0",
+  "homepage": "https://github.com/dam5s/somanyfeeds.java",
+  "authors": [
+    "Damien Le Berrigaud <damien@itsdamo.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4"
+  }
+}

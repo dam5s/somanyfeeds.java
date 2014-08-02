@@ -1,0 +1,52 @@
+html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+    font-size: 14px;
+}
+
+a:link, a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: coral;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.core-header {
+    height: 6.4em;
+    background-color: deepskyblue;
+    color: white;
+    transition: height 0.2s;
+}
+
+.core-header h1 {
+    padding: 28px;
+    margin: 0;
+    transition: font-size 0.2s;
+}
+
+.core-header.tall {
+    height: 12em;
+}
+
+.core-header.tall h1 {
+    font-size: 350%;
+}
+
+core-item {
+    padding: 1em;
+}
+
+base-article {
+    margin-top: 1em;
+}
