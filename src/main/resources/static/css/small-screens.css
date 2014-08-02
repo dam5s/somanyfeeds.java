@@ -5,7 +5,11 @@
 }
 
 @media(max-width: 600px) {
-    .core-header.tall h1 {
-        font-size: 250%;
+    #app-header #small-screen-menu {
+        display: inline-block;
+    }
+
+    #app-header #large-screen-menu {
+        display: none;
     }
 }

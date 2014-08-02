@@ -22,29 +22,38 @@ core-header-panel {
     -webkit-overflow-scrolling: touch;
 }
 
-.core-header {
+#app-header {
     height: 6.4em;
     background-color: deepskyblue;
     color: white;
     transition: height 0.2s;
 }
 
-.core-header h1 {
+#app-header h1 {
     padding: 28px;
     margin: 0;
     transition: font-size 0.2s;
 }
 
-.core-header.tall {
+#app-header.tall {
     height: 12em;
 }
 
-.core-header.tall h1 {
+#app-header.tall h1 {
     font-size: 350%;
 }
 
-core-item {
-    padding: 1em;
+#large-screen-menu paper-item {
+    margin: 1em;
+}
+
+#app-header #small-screen-menu {
+    margin: 28px;
+    display: none;
+}
+
+#small-screen-menu paper-item {
+    color: #000;
 }
 
 base-article {
