@@ -43,8 +43,13 @@ core-header-panel {
     font-size: 350%;
 }
 
-#large-screen-menu paper-item {
+#large-screen-menu core-item {
     margin: 1em;
+}
+
+#large-screen-menu core-item.selected {
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 #app-header #small-screen-menu {
@@ -52,8 +57,14 @@ core-header-panel {
     display: none;
 }
 
-#small-screen-menu paper-item {
+#small-screen-menu core-item {
     color: #000;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#small-screen-menu core-item.selected {
+    font-weight: bold;
 }
 
 base-article {

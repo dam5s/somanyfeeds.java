@@ -11,6 +11,7 @@ html {
         link(rel: "import", href: "/components/core-menu/core-menu.html")
         link(rel: "import", href: "/components/paper-menu-button/paper-menu-button.html")
         link(rel: "import", href: "/components/paper-item/paper-item.html")
+        link(rel: "import", href: "/components/core-item/core-item.html")
         link(rel: "import", href: "/custom-components/base-article.html")
         link(rel: "stylesheet", href: "/css/base.css")
         link(rel: "stylesheet", href: "/css/small-screens.css")
@@ -21,17 +22,17 @@ html {
                 h1(flex: true) {
                     yield "itsDamo.com"
                 }
-                "core-menu"(id: "large-screen-menu", multi: true, layout: true, horizontal: true) {
+                "core-menu"(id: "large-screen-menu", layout: true, horizontal: true) {
                     sources.each { src ->
-                        "paper-item"(label: src.name) {
-                            a(href: "#") {}
+                        "core-item"(label: src.name, class: (src.selected ? "selected" : "")) {
+                            a(href: src.link) {}
                         }
                     }
                 }
-                "paper-menu-button"(id: "small-screen-menu", icon: "menu", halign: "right", multi: true) {
+                "paper-menu-button"(id: "small-screen-menu", icon: "menu", halign: "right") {
                     sources.each { src ->
-                        "paper-item"(label: src.name) {
-                            a(href: "#") {}
+                        "core-item"(label: src.name, class: (src.selected ? "selected" : "")) {
+                            a(href: src.link) {}
                         }
                     }
                 }
