@@ -87,3 +87,9 @@ core-header-panel {
 base-article {
     margin-top: 1em;
 }
+
+/* Google Plus articles */
+.attachment_article_content,
+.attachment_photo_content {
+    display: none;
+}
