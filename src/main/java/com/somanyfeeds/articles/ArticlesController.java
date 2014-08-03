@@ -21,18 +21,8 @@ public class ArticlesController {
     }
 
     @RequestMapping("/")
-    public String listAllArticles(Model model) {
-        List<SourceEntity> selectedSources = sourcesRepository.findAll();
-        List<String> sourceSlugs = selectedSources.stream().map(SourceEntity::getSlug).collect(Collectors.toList());
-
-        List<SourcePresenter> sourcePresenters = selectedSources
-                .stream()
-                .map(source ->
-                                new SourcePresenter(source, sourceSlugs)
-                )
-                .collect(Collectors.toList());
-
-        return listArticlesForSources(model, selectedSources, sourcePresenters);
+    public String redirectToDefaultSources() {
+        return "redirect:/gplus,pivotal";
     }
 
     @RequestMapping("/{sourceSlugs}")
@@ -45,10 +35,6 @@ public class ArticlesController {
                 .collect(Collectors.toList());
 
 
-        return listArticlesForSources(model, selectedSources, sourcePresenters);
-    }
-
-    private String listArticlesForSources(Model model, List<SourceEntity> selectedSources, List<SourcePresenter> sourcePresenters) {
         List<ArticleEntity> articles = articlesRepository.findAllInSources(selectedSources);
 
         model.addAttribute("articles", articles);

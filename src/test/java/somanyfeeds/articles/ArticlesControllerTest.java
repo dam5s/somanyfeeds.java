@@ -34,27 +34,10 @@ public class ArticlesControllerTest {
     }
 
     @Test
-    public void testListAllArticles() throws Exception {
-        SourceEntity myBlog = sourceEntityBuilder().name("My Blog").slug("my-blog").build();
-        SourceEntity myPhotos = sourceEntityBuilder().name("My Photos").slug("my-photos").build();
-
-        List<SourceEntity> allSources = asList(myBlog, myPhotos);
-        List<ArticleEntity> articlesForAllSources = asList(
-                articleEntityBuilder().title("The Article").build()
-        );
-
-        doReturn(allSources).when(sourcesRepository).findAll();
-        doReturn(articlesForAllSources).when(articlesRepository).findAllInSources(allSources);
-
-        List<String> expectedSlugs = asList("my-blog", "my-photos");
+    public void testRedirectToDefaultSources() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("list-articles"))
-                .andExpect(model().attribute("sources", asList(
-                        new SourcePresenter(myBlog, expectedSlugs),
-                        new SourcePresenter(myPhotos, expectedSlugs)
-                )))
-                .andExpect(model().attribute("articles", articlesForAllSources));
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/gplus,pivotal"));
     }
 
     @Test
