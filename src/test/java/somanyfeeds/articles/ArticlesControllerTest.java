@@ -48,29 +48,38 @@ public class ArticlesControllerTest {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
-                .andExpect(model().attribute("sources", allSources))
-                .andExpect(model().attribute("somanyfeeds/articles", articlesForAllSources));
+                .andExpect(model().attribute("sources", asList(
+                        SourcePresenter.selectedSource(allSources.get(0))
+                )))
+                .andExpect(model().attribute("articles", articlesForAllSources));
     }
 
     @Test
     public void testListArticles() throws Exception {
-        List<SourceEntity> someSources = asList(
-                sourceEntityBuilder().name("My Blog").slug("my-blog").build(),
-                sourceEntityBuilder().name("My Photos").slug("my-photos").build()
-        );
+        SourceEntity myBlog = sourceEntityBuilder().name("My Blog").slug("my-blog").build();
+        SourceEntity myPhotos = sourceEntityBuilder().name("My Photos").slug("my-photos").build();
+        SourceEntity myCode = sourceEntityBuilder().name("My Code").slug("my-code").build();
+
+        List<SourceEntity> allSources = asList(myBlog, myPhotos, myCode);
+        List<SourceEntity> someSources = asList(myBlog, myPhotos);
         List<ArticleEntity> articlesForSomeSources = asList(
                 articleEntityBuilder().title("An Article").build(),
                 articleEntityBuilder().title("Another Article").build(),
                 articleEntityBuilder().title("The Photo").build()
         );
 
+        doReturn(allSources).when(sourcesRepository).findAll();
         doReturn(someSources).when(sourcesRepository).findAllBySlug(asList("my-blog", "my-photos"));
         doReturn(articlesForSomeSources).when(articlesRepository).findAllInSources(someSources);
 
         mockMvc.perform(get("/my-blog,my-photos"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
-                .andExpect(model().attribute("sources", someSources))
-                .andExpect(model().attribute("somanyfeeds/articles", articlesForSomeSources));
+                .andExpect(model().attribute("sources", asList(
+                        SourcePresenter.selectedSource(myBlog),
+                        SourcePresenter.selectedSource(myPhotos),
+                        SourcePresenter.unselectedSource(myCode)
+                )))
+                .andExpect(model().attribute("articles", articlesForSomeSources));
     }
 }

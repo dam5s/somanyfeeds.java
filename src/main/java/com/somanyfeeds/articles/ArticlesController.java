@@ -1,14 +1,13 @@
 package com.somanyfeeds.articles;
 
-import com.somanyfeeds.sources.SourceEntity;
-import com.somanyfeeds.sources.SourcesRepository;
+import com.somanyfeeds.sources.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ArticlesController {
@@ -23,22 +22,36 @@ public class ArticlesController {
 
     @RequestMapping("/")
     public String listAllArticles(Model model) {
-        List<SourceEntity> sources = sourcesRepository.findAll();
+        List<SourceEntity> selectedSources = sourcesRepository.findAll();
+        List<SourcePresenter> sourcePresenters = selectedSources
+                .stream()
+                .map(SourcePresenter::selectedSource)
+                .collect(Collectors.toList());
 
-        return listArticlesForSources(model, sources);
+        return listArticlesForSources(model, selectedSources, sourcePresenters);
     }
 
     @RequestMapping("/{sourceSlugs}")
     public String listArticles(@PathVariable List<String> sourceSlugs, Model model) {
-        List<SourceEntity> sources = sourcesRepository.findAllBySlug(sourceSlugs);
+        List<SourceEntity> selectedSources = sourcesRepository.findAllBySlug(sourceSlugs);
+        List<SourcePresenter> sourcePresenters = new ArrayList<>();
 
-        return listArticlesForSources(model, sources);
+        for (SourceEntity source : sourcesRepository.findAll()) {
+            if (selectedSources.contains(source)) {
+                sourcePresenters.add(SourcePresenter.selectedSource(source));
+            } else {
+                sourcePresenters.add(SourcePresenter.unselectedSource(source));
+            }
+        }
+
+        return listArticlesForSources(model, selectedSources, sourcePresenters);
     }
 
-    private String listArticlesForSources(Model model, List<SourceEntity> sources) {
-        List<ArticleEntity> articles = articlesRepository.findAllInSources(sources);
-        model.addAttribute("sources", sources);
+    private String listArticlesForSources(Model model, List<SourceEntity> selectedSources, List<SourcePresenter> sourcePresenters) {
+        List<ArticleEntity> articles = articlesRepository.findAllInSources(selectedSources);
+
         model.addAttribute("articles", articles);
+        model.addAttribute("sources", sourcePresenters);
 
         return "list-articles";
     }
