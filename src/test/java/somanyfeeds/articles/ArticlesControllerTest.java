@@ -35,9 +35,10 @@ public class ArticlesControllerTest {
 
     @Test
     public void testListAllArticles() throws Exception {
-        List<SourceEntity> allSources = asList(
-                sourceEntityBuilder().name("My Blog").slug("my-blog").build()
-        );
+        SourceEntity myBlog = sourceEntityBuilder().name("My Blog").slug("my-blog").build();
+        SourceEntity myPhotos = sourceEntityBuilder().name("My Photos").slug("my-photos").build();
+
+        List<SourceEntity> allSources = asList(myBlog, myPhotos);
         List<ArticleEntity> articlesForAllSources = asList(
                 articleEntityBuilder().title("The Article").build()
         );
@@ -45,11 +46,13 @@ public class ArticlesControllerTest {
         doReturn(allSources).when(sourcesRepository).findAll();
         doReturn(articlesForAllSources).when(articlesRepository).findAllInSources(allSources);
 
+        List<String> expectedSlugs = asList("my-blog", "my-photos");
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
                 .andExpect(model().attribute("sources", asList(
-                        SourcePresenter.selectedSource(allSources.get(0))
+                        new SourcePresenter(myBlog, expectedSlugs),
+                        new SourcePresenter(myPhotos, expectedSlugs)
                 )))
                 .andExpect(model().attribute("articles", articlesForAllSources));
     }
@@ -72,13 +75,15 @@ public class ArticlesControllerTest {
         doReturn(someSources).when(sourcesRepository).findAllBySlug(asList("my-blog", "my-photos"));
         doReturn(articlesForSomeSources).when(articlesRepository).findAllInSources(someSources);
 
+        List<String> expectedSlugs = asList("my-blog", "my-photos");
+
         mockMvc.perform(get("/my-blog,my-photos"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list-articles"))
                 .andExpect(model().attribute("sources", asList(
-                        SourcePresenter.selectedSource(myBlog),
-                        SourcePresenter.selectedSource(myPhotos),
-                        SourcePresenter.unselectedSource(myCode)
+                        new SourcePresenter(myBlog, expectedSlugs),
+                        new SourcePresenter(myPhotos, expectedSlugs),
+                        new SourcePresenter(myCode, expectedSlugs)
                 )))
                 .andExpect(model().attribute("articles", articlesForSomeSources));
     }

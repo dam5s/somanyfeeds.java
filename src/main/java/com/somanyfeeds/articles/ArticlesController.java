@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -23,9 +23,13 @@ public class ArticlesController {
     @RequestMapping("/")
     public String listAllArticles(Model model) {
         List<SourceEntity> selectedSources = sourcesRepository.findAll();
+        List<String> sourceSlugs = selectedSources.stream().map(SourceEntity::getSlug).collect(Collectors.toList());
+
         List<SourcePresenter> sourcePresenters = selectedSources
                 .stream()
-                .map(SourcePresenter::selectedSource)
+                .map(source ->
+                                new SourcePresenter(source, sourceSlugs)
+                )
                 .collect(Collectors.toList());
 
         return listArticlesForSources(model, selectedSources, sourcePresenters);
@@ -34,15 +38,12 @@ public class ArticlesController {
     @RequestMapping("/{sourceSlugs}")
     public String listArticles(@PathVariable List<String> sourceSlugs, Model model) {
         List<SourceEntity> selectedSources = sourcesRepository.findAllBySlug(sourceSlugs);
-        List<SourcePresenter> sourcePresenters = new ArrayList<>();
+        List<SourcePresenter> sourcePresenters = sourcesRepository
+                .findAll()
+                .stream()
+                .map(source -> new SourcePresenter(source, sourceSlugs))
+                .collect(Collectors.toList());
 
-        for (SourceEntity source : sourcesRepository.findAll()) {
-            if (selectedSources.contains(source)) {
-                sourcePresenters.add(SourcePresenter.selectedSource(source));
-            } else {
-                sourcePresenters.add(SourcePresenter.unselectedSource(source));
-            }
-        }
 
         return listArticlesForSources(model, selectedSources, sourcePresenters);
     }

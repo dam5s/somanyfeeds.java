@@ -1,20 +1,15 @@
 package com.somanyfeeds.sources;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class SourcePresenter {
     private final SourceEntity source;
-    private final boolean selected;
+    private final List<String> slugs;
 
-    private SourcePresenter(SourceEntity source, boolean selected) {
+    public SourcePresenter(SourceEntity source, List<String> slugs) {
         this.source = source;
-        this.selected = selected;
-    }
-
-    public static SourcePresenter selectedSource(SourceEntity source) {
-        return new SourcePresenter(source, true);
-    }
-
-    public static SourcePresenter unselectedSource(SourceEntity source) {
-        return new SourcePresenter(source, false);
+        this.slugs = slugs;
     }
 
     public String getName() {
@@ -26,7 +21,18 @@ public class SourcePresenter {
     }
 
     public boolean isSelected() {
-        return selected;
+        return slugs.contains(getSlug());
+    }
+
+    public String getLink() {
+        ArrayList<String> newSlugs = new ArrayList<>(slugs);
+        if (isSelected()) {
+            newSlugs.remove(getSlug());
+        } else {
+            newSlugs.add(getSlug());
+        }
+
+        return "/" + newSlugs.stream().sorted().collect(Collectors.joining(","));
     }
 
     @Override
@@ -34,10 +40,10 @@ public class SourcePresenter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SourcePresenter that = (SourcePresenter) o;
+        SourcePresenter presenter = (SourcePresenter) o;
 
-        if (selected != that.selected) return false;
-        if (source != null ? !source.equals(that.source) : that.source != null) return false;
+        if (slugs != null ? !slugs.equals(presenter.slugs) : presenter.slugs != null) return false;
+        if (source != null ? !source.equals(presenter.source) : presenter.source != null) return false;
 
         return true;
     }
@@ -45,7 +51,7 @@ public class SourcePresenter {
     @Override
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
-        result = 31 * result + (selected ? 1 : 0);
+        result = 31 * result + (slugs != null ? slugs.hashCode() : 0);
         return result;
     }
 }
