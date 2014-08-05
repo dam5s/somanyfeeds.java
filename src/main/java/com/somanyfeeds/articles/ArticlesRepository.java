@@ -4,10 +4,11 @@ import com.somanyfeeds.sources.SourceEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class ArticlesRepository {
-    private final Map<SourceEntity, List<ArticleEntity>> articlesBySource = new HashMap<>();
+    private final Map<SourceEntity, List<ArticleEntity>> articlesBySource = new ConcurrentHashMap<>();
 
     public List<ArticleEntity> findAllInSources(List<SourceEntity> sources) {
         List<ArticleEntity> articles = new ArrayList<>();
