@@ -64,6 +64,9 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.0"
     compile "org.codehaus.woodstox:woodstox-core-asl:4.1.4"
 
+    // Logging
+    compile "org.slf4j:slf4j-api:1.7.7"
+
     // Testing
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
     testCompile "junit:junit:4.11"
