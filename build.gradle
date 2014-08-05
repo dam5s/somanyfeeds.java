@@ -28,10 +28,11 @@ targetCompatibility = 1.8
 task(deploy, dependsOn: build) << {
     def warFile = "build/libs/somanyfeeds-1.0-SNAPSHOT.war"
     def buildpack = "https://github.com/spring-io/java-buildpack"
+    def appName = "itsdamo"
 
-    println "running: cf push itsdamo -p $warFile -b $buildpack"
+    println "running: cf push $appName -p $warFile -b $buildpack"
 
-    def builder = new ProcessBuilder("cf", "push", "itsdamo", "-p", warFile, "-b", buildpack)
+    def builder = new ProcessBuilder("cf", "push", appName, "-p", warFile, "-b", buildpack)
     builder.inheritIO()
 
     def proc = builder.start()
