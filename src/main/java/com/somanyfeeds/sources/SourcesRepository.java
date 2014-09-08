@@ -34,7 +34,7 @@ public class SourcesRepository {
                 .map(allSources::get)
                 .collect(Collectors.toList());
 
-        sources.sort((s1, s2) -> s1.getName().compareTo(s2.getName()));
+        sources.sort(comparing(SourceEntity::getName));
         return sources;
     }
 

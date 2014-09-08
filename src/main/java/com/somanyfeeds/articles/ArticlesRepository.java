@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+
 @Repository
 public class ArticlesRepository {
     private final Map<SourceEntity, List<ArticleEntity>> articlesBySource = new ConcurrentHashMap<>();
@@ -13,15 +16,12 @@ public class ArticlesRepository {
     public List<ArticleEntity> findAllInSources(List<SourceEntity> sources) {
         List<ArticleEntity> articles = new ArrayList<>();
 
-        for (SourceEntity source : sources) {
-            List<ArticleEntity> sourcesArticles = articlesBySource.get(source);
+        sources
+                .stream()
+                .flatMap((source) -> articlesBySource.get(source).stream())
+                .sorted(comparing(ArticleEntity::getDate))
+                .collect(toList());
 
-            if (sourcesArticles != null) {
-                articles.addAll(sourcesArticles);
-            }
-        }
-
-        articles.sort((a1, a2) -> a2.getDate().compareTo(a1.getDate()));
         return articles;
     }
 
