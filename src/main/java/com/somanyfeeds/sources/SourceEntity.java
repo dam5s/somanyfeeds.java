@@ -6,11 +6,13 @@ public class SourceEntity {
     private final String name;
     private final String slug;
     private final FeedEntity feed;
+    private final SourceType type;
 
-    public SourceEntity(String name, String slug, FeedEntity feed) {
-        this.name = name;
-        this.slug = slug;
-        this.feed = feed;
+    private SourceEntity(Builder builder) {
+        this.name = builder.name;
+        this.slug = builder.slug;
+        this.feed = builder.feed;
+        this.type = builder.type;
     }
 
     public static Builder sourceEntityBuilder() {
@@ -29,6 +31,10 @@ public class SourceEntity {
         return feed;
     }
 
+    public SourceType getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,6 +45,7 @@ public class SourceEntity {
         if (feed != null ? !feed.equals(that.feed) : that.feed != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (slug != null ? !slug.equals(that.slug) : that.slug != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
     }
@@ -48,6 +55,7 @@ public class SourceEntity {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (slug != null ? slug.hashCode() : 0);
         result = 31 * result + (feed != null ? feed.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 
@@ -55,6 +63,7 @@ public class SourceEntity {
         private String name;
         private String slug;
         private FeedEntity feed;
+        private SourceType type;
 
         private Builder() {
         }
@@ -74,8 +83,13 @@ public class SourceEntity {
             return this;
         }
 
+        public Builder type(SourceType type) {
+            this.type = type;
+            return this;
+        }
+
         public SourceEntity build() {
-            return new SourceEntity(name, slug, feed);
+            return new SourceEntity(this);
         }
     }
 }
