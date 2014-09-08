@@ -10,23 +10,36 @@
                 background-color: white;
                 padding: 20px;
                 width: 100%;
-                font-size: 1.2rem;
+                font-size: 1.2em;
                 font-weight: 300;
                 overflow-x: auto;
+                margin-top: 1em;
             }
 
+            polyfill-next-selector { content: ":host .base-article-header"; }
             .base-article-header {
                 margin-bottom: 10px;
             }
 
-            polyfill-next-selector {
-                content: ".card-header h2";
+            polyfill-next-selector { content: ":host h2"; }
+            ::content h2 {
+                padding-right: 4em;
             }
 
-            .card-header ::content h2 {
-                margin: 0;
-                font-size: 1.8rem;
-                font-weight: 300;
+            polyfill-next-selector { content: ":host h2 a:link, :host h2 a:visited"; }
+            ::content h2 a:link, ::content h2 a:visited {
+                color: #444;
+            }
+
+            polyfill-next-selector { content: ":host h3"; }
+            ::content h3 {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                font-size: .8em;
+                color: #666;
+                padding: 0 1em 0 0;
             }
         </style>
 

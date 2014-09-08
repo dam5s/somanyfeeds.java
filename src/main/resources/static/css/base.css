@@ -1,14 +1,40 @@
+* {
+    line-height: 120%;
+}
+
 html,body {
     height: 100%;
     margin: 0;
-    background-color: #E5E5E5;
-    font-family: 'RobotoDraft', sans-serif;
+    background-color: #f6f6f6;
     font-size: 14px;
+    line-height: 130%;
+    font-family: 'Lora', 'Georgia', serif;
+    font-weight: 400;
+    color: #333;
+}
+
+h1, h2, h3 {
+    font-family: 'RobotoDraft', sans-serif;
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: 500;
+    margin: .5em 0;
+}
+
+h3 {
+    font-size: 1.3em;
+    font-weight: 300;
 }
 
 a:link, a:hover, a:visited, a:active {
     text-decoration: none;
     color: coral;
+}
+
+p {
+    margin: .3em 0;
 }
 
 .container {
@@ -24,8 +50,8 @@ core-header-panel {
 
 #app-header {
     height: 5.4em;
-    background-color: deepskyblue;
-    color: white;
+    background-color: #444;
+    color: #fff;
     transition: height 0.2s;
 }
 
@@ -82,10 +108,6 @@ core-header-panel {
 #small-screen-menu core-item.selected:hover {
     font-weight: 500;
     border-color: black;
-}
-
-base-article {
-    margin-top: 1em;
 }
 
 /* Google Plus articles */

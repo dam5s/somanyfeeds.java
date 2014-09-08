@@ -1,7 +1,7 @@
 yieldUnescaped "<!doctype html>"
 html {
     head {
-        title("itsDamo.com")
+        title("damo.io")
         meta(charset: "utf-8")
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 
@@ -13,14 +13,15 @@ html {
         link(rel: "import", href: "/components/paper-item/paper-item.html")
         link(rel: "import", href: "/components/core-item/core-item.html")
         link(rel: "import", href: "/custom-components/base-article.html")
-        link(rel: "stylesheet", href: "/css/base.css")
-        link(rel: "stylesheet", href: "/css/small-screens.css")
+        link(rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Lora:400,700", "no-shim": "true")
+        link(rel: "stylesheet", href: "/css/base.css", "no-shim": "true")
+        link(rel: "stylesheet", href: "/css/small-screens.css", "no-shim": "true")
     }
     body(unresolved: true, "touch-action": "auto") {
         "core-header-panel"(mode: "waterfall-tall") {
             div(id: "app-header", class: "core-header", layout: true, horizontal: true, end: true) {
                 h1(flex: true) {
-                    yield "itsDamo.com"
+                    yield "damo.io"
                 }
                 "core-menu"(id: "large-screen-menu", layout: true, horizontal: true) {
                     sources.each { src ->
