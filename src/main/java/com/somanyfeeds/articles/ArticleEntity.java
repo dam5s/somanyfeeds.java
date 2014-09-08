@@ -9,11 +9,11 @@ public class ArticleEntity {
     private final String content;
     private final ZonedDateTime date;
 
-    public ArticleEntity(String title, String link, String content, ZonedDateTime date) {
-        this.title = title;
-        this.link = link;
-        this.content = content;
-        this.date = date;
+    private ArticleEntity(Builder builder) {
+        this.title = builder.title;
+        this.link = builder.link;
+        this.content = builder.content;
+        this.date = builder.date;
     }
 
     public static Builder articleEntityBuilder() {
@@ -91,7 +91,7 @@ public class ArticleEntity {
         }
 
         public ArticleEntity build() {
-            return new ArticleEntity(title, link, content, date);
+            return new ArticleEntity(this);
         }
     }
 }
