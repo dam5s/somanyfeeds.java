@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700|RobotoDraft:regular,bold,medium">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Roboto:100,300,400,700">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/small-screens.css">
 </head>
@@ -26,9 +26,10 @@
 <div id="app-content" layout vertical center>
     <c:forEach var="article" items="${articles}">
         <article class="base-article">
-            <h2><a href="${article.link}">${article.title}</a></h2>
-
-            <h3>${article.date}</h3>
+            <header>
+                <h3>${article.date}</h3>
+                <h2><a href="${article.link}">${article.title}</a></h2>
+            </header>
             <section>${article.content}</section>
         </article>
     </c:forEach>
