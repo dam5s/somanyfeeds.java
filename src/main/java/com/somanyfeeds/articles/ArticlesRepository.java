@@ -18,7 +18,7 @@ public class ArticlesRepository {
         return sources
                 .stream()
                 .flatMap((source) -> articlesBySource.getOrDefault(source, emptyList()).stream())
-                .sorted(comparing(ArticleEntity::getDate))
+                .sorted(comparing(ArticleEntity::getDate).reversed())
                 .collect(toList());
     }
 
