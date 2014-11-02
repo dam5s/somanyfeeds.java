@@ -2,7 +2,7 @@
     line-height: 120%;
 }
 
-html,body {
+html, body {
     height: 100%;
     margin: 0;
     background-color: #f6f6f6;
@@ -37,81 +37,86 @@ p {
     margin: .3em 0;
 }
 
-.container {
-    width: 60%;
-    margin: 0 auto;
-}
-
-core-header-panel {
-    height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+#app-content {
+    width: 100%;
+    margin: 6.4em auto 0;
 }
 
 #app-header {
     height: 5.4em;
     background-color: #444;
     color: #fff;
-    transition: height 0.2s;
-}
-
-#app-header.tall {
-    height: 12em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
 }
 
 #app-header h1 {
     padding: 19px;
     margin: 0;
-    transition: font-size 0.2s;
 }
 
-#app-header.tall h1 {
-    font-size: 350%;
-}
-
-#app-header #large-screen-menu {
+#app-header #menu {
     margin: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
-#large-screen-menu core-item {
+#menu li {
+    display: inline-block;
     padding: 1em;
     border-bottom: 2px solid transparent;
 }
 
-#large-screen-menu core-item:hover {
+#menu li:hover {
     border-color: #76ddff;
 }
 
-#large-screen-menu core-item.selected,
-#large-screen-menu core-item.selected:hover {
+#menu li.selected,
+#menu li.selected:hover {
     font-weight: 500;
     border-color: white;
 }
 
-#app-header #small-screen-menu {
-    margin: 19px;
-    display: none;
+.base-article {
+    display: block;
+    position: relative;
+    background-color: white;
+    padding: 1em 1%;
+    font-size: 1em;
+    font-weight: 300;
+    overflow-x: auto;
+    margin: 1em 1%;
+    width: 46%;
+    float: left;
 }
 
-#small-screen-menu core-item {
-    color: #000;
-    padding-left: 1em;
-    padding-right: 1em;
-    border-left: 2px solid transparent;
+.base-article img {
+    max-width: 100%;
 }
 
-#small-screen-menu core-item:hover {
-    border-color: #999;
+.base-article h2 {
+    padding-right: 4em;
 }
 
-#small-screen-menu core-item.selected,
-#small-screen-menu core-item.selected:hover {
-    font-weight: 500;
-    border-color: black;
+.base-article h2 a:link, .base-article h2 a:visited {
+    color: #444;
+}
+
+.base-article h3 {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    font-size: .8em;
+    color: #666;
+    padding: 0 1em 0 0;
 }
 
 /* Google Plus articles */
-.attachment_article_content,
-.attachment_photo_content {
+.base-article .attachment_article_content,
+.base-article .attachment_photo_content {
     display: none;
 }

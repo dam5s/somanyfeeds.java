@@ -1,15 +1,9 @@
-@media(max-width: 900px) {
-    .container {
+@media(max-width: 600px) {
+    #app-content {
         width: 90%;
     }
-}
-
-@media(max-width: 600px) {
-    #app-header #small-screen-menu {
-        display: inline-block;
-    }
-
-    #app-header #large-screen-menu {
-        display: none;
+    .base-article {
+        width: 100%;
+        margin: 1em 0;
     }
 }
