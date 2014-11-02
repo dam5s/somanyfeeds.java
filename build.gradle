@@ -20,7 +20,7 @@ apply plugin: "jetty"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-task(deploy, dependsOn: build) << {
+task("deploy", dependsOn: build) << {
     def warFile = "build/libs/somanyfeeds-1.0-SNAPSHOT.war"
     def buildpack = "https://github.com/spring-io/java-buildpack"
     def appName = "itsdamo"
@@ -39,6 +39,30 @@ war {
         providedRuntime
     }
 }
+
+task("dartDependencies", type: Exec) {
+    logging.captureStandardOutput LogLevel.INFO
+    logging.captureStandardError LogLevel.INFO
+
+    inputs.file "src/main/resources/dart/pubspec.yaml"
+    outputs.dir "src/main/resources/dart/packages"
+
+    workingDir "src/main/resources/dart"
+    commandLine "pub", "get"
+}
+
+task("buildDart", type: Exec, dependsOn: "dartDependencies") {
+    logging.captureStandardOutput LogLevel.INFO
+    logging.captureStandardError LogLevel.INFO
+
+    inputs.file "src/main/resources/dart/application.dart"
+    outputs.dir "src/main/resources/dart/application.dart.js"
+
+    workingDir "src/main/resources/dart"
+    commandLine "dart2js", "-m", "-o", "application.dart.js", "application.dart"
+}
+
+war.dependsOn "buildDart"
 
 repositories {
     mavenLocal()

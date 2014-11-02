@@ -8,6 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
+    <script type="application/dart" src="${pageContext.request.contextPath}/dart/application.dart"></script>
+    <script src="${pageContext.request.contextPath}/dart/packages/browser/dart.js"></script>
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Roboto:100,300,400,700">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/small-screens.css">
@@ -27,7 +30,7 @@
     <c:forEach var="article" items="${articles}">
         <article class="base-article">
             <header>
-                <h3>${article.date}</h3>
+                <h3 class="date">${article.date}</h3>
                 <h2><a href="${article.link}">${article.title}</a></h2>
             </header>
             <section>${article.content}</section>

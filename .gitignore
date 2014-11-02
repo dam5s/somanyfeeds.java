@@ -3,4 +3,7 @@
 .gradle
 build
 out
-bower_components
+
+src/main/resources/dart/.pub
+src/main/resources/dart/*.js*
+src/main/resources/dart/packages
