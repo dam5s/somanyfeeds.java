@@ -52,7 +52,6 @@ dependencies {
 
     // JSP
     compile "jstl:jstl:1.2"
-    runtime "javax.servlet.jsp:jsp-api:2.0"
 
     // HTTP
     compile "com.google.http-client:google-http-client:1.18.0-rc"
