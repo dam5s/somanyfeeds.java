@@ -45,7 +45,7 @@ public class SourceEntity {
         if (feed != null ? !feed.equals(that.feed) : that.feed != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (slug != null ? !slug.equals(that.slug) : that.slug != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (type != that.type) return false;
 
         return true;
     }

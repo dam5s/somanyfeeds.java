@@ -3,9 +3,7 @@ version = "1.0-SNAPSHOT"
 description = """Somanyfeeds -  A simple feed aggregator"""
 
 ext {
-    springVersion = "4.0.6.RELEASE"
-    springBootVersion = "1.1.4.RELEASE"
-    groovyVersion = "2.3.3"
+    springVersion = "4.1.1.RELEASE"
 }
 
 buildscript {
@@ -13,14 +11,11 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE")
-    }
 }
 
 apply plugin: "java"
-apply plugin: "spring-boot"
 apply plugin: "war"
+apply plugin: "jetty"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -51,12 +46,13 @@ repositories {
 }
 
 dependencies {
-    // Spring Boot
-    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    // Spring
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "javax.servlet:javax.servlet-api:3.0.1"
 
-    // Groovy Templates
-    compile "org.codehaus.groovy:groovy:$groovyVersion"
-    compile "org.codehaus.groovy:groovy-templates:$groovyVersion"
+    // JSP
+    compile "jstl:jstl:1.2"
+    runtime "javax.servlet.jsp:jsp-api:2.0"
 
     // HTTP
     compile "com.google.http-client:google-http-client:1.18.0-rc"
@@ -69,7 +65,9 @@ dependencies {
     compile "org.slf4j:slf4j-api:1.7.7"
 
     // Testing
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testCompile "org.springframework:spring-test:$springVersion"
     testCompile "junit:junit:4.11"
+    testCompile "org.hamcrest:hamcrest-core:1.3"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
     testCompile "org.mockito:mockito-core:1.9.5"
 }
