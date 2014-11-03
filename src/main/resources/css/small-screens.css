@@ -1,4 +1,4 @@
-@media(max-width: 600px) {
+@media(max-width: 800px) {
     #app-content {
         width: 90%;
 
@@ -8,5 +8,17 @@
     }
     .base-article {
         margin: 1em 0;
+    }
+}
+
+@media(max-width: 500px) {
+    #app-content {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .base-article {
+        padding: 1em;
+        border-radius: 0;
     }
 }

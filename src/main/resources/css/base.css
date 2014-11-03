@@ -96,7 +96,6 @@ p {
     background-color: white;
     padding: 1em 2em;
     font-size: 1em;
-    overflow-x: auto;
     margin: 1em 1%;
 
     border-radius: 3px;
@@ -113,7 +112,6 @@ p {
 }
 
 .base-article h2 {
-    padding-right: 4em;
     font-weight: 300;
 }
 
