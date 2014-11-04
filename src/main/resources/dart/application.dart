@@ -10,4 +10,13 @@ void main() {
     DateFormat dateFormat = new DateFormat("EEE, MMM d, ''yy");
     dateElement.innerHtml = dateFormat.format(date);
   });
+
+  Element headerElement = document.querySelector('#app-header');
+  window.onScroll.listen((Event e) {
+    if (window.scrollY > 100) {
+      headerElement.classes.add('small');
+    } else {
+      headerElement.classes.remove('small');
+    }
+  });
 }

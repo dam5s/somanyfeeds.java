@@ -38,7 +38,7 @@ p {
 
 #app-content {
     width: 98%;
-    margin: 6.4em auto 0;
+    margin: 0 auto;
 
     -webkit-column-count: 2;
     -webkit-column-gap: 1em;
@@ -52,7 +52,7 @@ p {
 }
 
 #app-header {
-    height: 5.4em;
+    height: 7.4em;
     background-color: rgba(43, 43, 43, .95);
     color: #fff;
     position: fixed;
@@ -61,11 +61,16 @@ p {
     z-index: 10;
 
     box-shadow: 0 2px 1px rgba(0,0,0,.3);
+    transition: height .3s ease;
 }
 
 #app-header h1 {
-    padding: 19px;
+    padding: 0 0 0 2%;
     margin: 0;
+    font-size: 3em;
+    line-height: 2.5em;
+
+    transition: font-size .3s ease, line-height .3s ease;
 }
 
 #app-header #menu {
@@ -73,6 +78,23 @@ p {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+#app-header + div {
+    margin-top: 8.4em;
+}
+
+#app-header.small {
+    height: 5.4em;
+}
+
+#app-header.small h1 {
+    font-size: 2em;
+    line-height: 2.7em;
+}
+
+#app-header.small + div {
+    margin-top: 6.4em;
 }
 
 #menu li {
