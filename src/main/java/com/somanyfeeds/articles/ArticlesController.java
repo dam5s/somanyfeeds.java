@@ -25,21 +25,35 @@ public class ArticlesController {
         return "redirect:/gplus,pivotal";
     }
 
-    @RequestMapping("/{sourceSlugs}")
-    public String listArticles(@PathVariable List<String> sourceSlugs, Model model) {
-        List<SourceEntity> selectedSources = sourcesRepository.findAllBySlug(sourceSlugs);
+    @RequestMapping(value = "/{sourceSlugs}", headers = {"accept=text/html"})
+    public String listArticlesAsHtml(@PathVariable List<String> sourceSlugs, Model model) {
         List<SourcePresenter> sourcePresenters = sourcesRepository
                 .findAll()
                 .stream()
                 .map(source -> new SourcePresenter(source, sourceSlugs))
                 .collect(Collectors.toList());
 
-
-        List<ArticleEntity> articles = articlesRepository.findAllInSources(selectedSources);
-
-        model.addAttribute("articles", articles);
         model.addAttribute("sources", sourcePresenters);
+        model.addAttribute("articles", getArticles(sourceSlugs));
 
         return "list-articles";
+    }
+
+    @RequestMapping(value = "/{sourceSlugs}", headers = {"accept=application/json"})
+    public @ResponseBody ArticlesJson listArticlesAsJson(@PathVariable List<String> sourceSlugs) {
+        return new ArticlesJson(getArticles(sourceSlugs));
+    }
+
+    private List<ArticleEntity> getArticles(List<String> sourceSlugs) {
+        List<SourceEntity> selectedSources = sourcesRepository.findAllBySlug(sourceSlugs);
+        return articlesRepository.findAllInSources(selectedSources);
+    }
+
+    private class ArticlesJson {
+        public List<ArticleEntity> articles;
+
+        private ArticlesJson(List<ArticleEntity> articles) {
+            this.articles = articles;
+        }
     }
 }

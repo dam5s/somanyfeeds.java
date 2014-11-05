@@ -67,7 +67,6 @@ public class ArticleEntity {
         private ZonedDateTime date;
 
         private Builder() {
-            date = ZonedDateTime.now();
         }
 
         public Builder title(String title) {
